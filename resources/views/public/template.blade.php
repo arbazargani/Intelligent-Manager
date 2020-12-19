@@ -16,7 +16,51 @@
             background: lightgray;
             height: 100vh;
         }
+        .bg-lightgray {
+            background: lightgray;
+        }
+        .alert-box {
+            background: #f4645f;
+            color: #fff;
+            border-radius: 3px;
+            margin: 10px 0 20px;
+            padding: 10px;
+        }
+
+        .info-box {
+            background: #3498db;
+            color: #fff;
+            border-radius: 3px;
+            margin: 10px 0 20px;
+            padding: 10px;
+        }
+
+        .warning-box {
+            background: #e67e22;
+            color: #fff;
+            border-radius: 3px;
+            margin: 10px 0 20px;
+            padding: 10px;
+        }
+
+        .success-box {
+            background: #27ae60;
+            color: #fff;
+            border-radius: 3px;
+            margin: 10px 0 20px;
+            padding: 10px;
+        }
+
+        .spaned {
+            background: #fefefe;
+            color: gray;
+            padding: 0 1.5%;
+            border-radius: 3px;
+            color: black;
+            
+        }
     </style>
+    
 </head>
 <body>
     <div class="uk-container uk-container-expand uk-padding-large">
@@ -46,7 +90,7 @@
                 </div>
                 <div>
                     <p uk-tooltip="title: Add customer; pos: top">
-                        <a href="#" class="uk-link-reset">
+                        <a href="{{ route('Customers > Add') }}" class="uk-link-reset">
                             <span uk-icon="plus"></span>
                             <span class="uk-visible@m">&nbsp;Customer</span>
                         </a>
@@ -54,7 +98,7 @@
                 </div>
                 <div>
                     <p uk-tooltip="title: Add service; pos: top">
-                        <a href="#" class="uk-link-reset">
+                        <a href="{{ route('Services > Add') }}" class="uk-link-reset">
                             <span uk-icon="plus-circle"></span>
                             <span class="uk-visible@m">&nbsp;Service</span>
                         </a>
@@ -63,11 +107,13 @@
             </div>
         </div>
     </div>
-    <div class="uk-container uk-container-expand uk-padding-large uk-padding-remove-top">
+    <div class="uk-container uk-container-expand uk-padding-large uk-padding-remove-top bg-lightgray">
         <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+            @if(Auth::check())
             <div class="uk-margin-small-bottom">
                 <span class="uk-text-meta">logged in: {{ Auth::user()->name }}</span>
             </div>
+            @endif
             @yield('content')
             <div id="spinner" class="uk-text-center" style="display: none">
                 <div uk-spinner></div>

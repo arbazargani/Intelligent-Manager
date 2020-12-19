@@ -39,7 +39,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('services')->group( function () {
-        Route::get('{hash}', 'App\Http\Controllers\ServiceController@ListServices')->name('Services > Show');
+        Route::get('{hash}', 'App\Http\Controllers\ServiceController@ListServices')->name('Service > Show');
+        Route::any('update/{hash}', 'App\Http\Controllers\ServiceController@UpdateService')->name('Service > Update');
+        Route::post('delete/{hash}', 'App\Http\Controllers\ServiceController@DeleteService')->name('Service > Delete');
     });
 });
 

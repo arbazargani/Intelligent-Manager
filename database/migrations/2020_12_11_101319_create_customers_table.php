@@ -18,8 +18,9 @@ class CreateCustomersTable extends Migration
             $table->string('name', 200);
             $table->string('company_name', 200);
             $table->json('customer_info')->nullable();
-
             $table->text('hash')->nullable();
+            
+            $table->softDeletes();
             $table->timestamps();
         });
     }
