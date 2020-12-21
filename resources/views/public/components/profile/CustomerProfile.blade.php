@@ -37,10 +37,10 @@
                                 <div class="uk-accordion-content">
                                     <div class="uk-width-1-1">
                                         <ul class="uk-list uk-list-hyphen uk-list-primary">
-                                            @foreach(explode(',', $service->info) as $item)
+                                            @foreach(explode(',', trim($service->info, ',')) as $item)
                                             <li>
                                                 @if(strpos($service->info, ':') !== false)
-                                                    <p><span>{{ explode(':', $item)[0] }}: <span class="uk-label uk-label-success">{{ explode(':', $item)[1] }}</span></span></p>
+                                                    <p><span>{{ explode(':', $item)[0] }}: <span class="uk-label uk-label-success text-transform-unset">{{ explode(':', $item)[1] }}</span></span></p>
                                                 @else
                                                     <p><span class="uk-label uk-label-danger">Syntax incorrect.</span></p>
                                                 @endif

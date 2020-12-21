@@ -9,11 +9,24 @@ use App\Models\Service;
 
 class ServiceController extends Controller
 {
+    protected $services;
+    protected $customers;
+
+    public function __construct() {
+        $this->services = Service::latest()->get();
+        $this->customers = Customer::all();
+    }
+
     public function AddService(Request $request) {
-        $customers = Customer::all();
+        $customers = $this->customers;
         if ($request->isMethod('GET')) {
             return view('public.components.form.AddService', compact(['customers']));
         } elseif ($request->isMethod('POST')) {
+            $request->validate([
+                'service_name' => 'required|min:3',
+                'options' => 'required|min:4',
+                'customer_id' => 'required|integer'
+            ]);
             $service = new Service();
             $service->name = $request->service_name;
             $service->type = 'service';
@@ -35,15 +48,21 @@ class ServiceController extends Controller
     }
 
     public function ListServices(Request $request) {
-        return Service::latest()->get();
+        $services = $this->services;
+        return view('public.components.table.ListServices', compact(['services']));
     }
 
     public function UpdateService (Request $request, $hash) {
-        $customers = Customer::all();
+        $customers = $this->customers;
         $service = Service::where('hash', $hash)->first();
         if ($request->isMethod('GET')) {
             return view('public.components.form.EditService', compact(['customers', 'service']));
         } elseif ($request->isMethod('POST')) {
+            $request->validate([
+                'service_name' => 'required|min:3',
+                'options' => 'required|min:4',
+                'customer_id' => 'required|integer'
+            ]);
             $service = Service::where('hash', $hash)->first();
             $service->name = $request->service_name;
             $service->type = 'service';

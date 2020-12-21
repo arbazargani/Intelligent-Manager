@@ -26,7 +26,7 @@
             <div class="uk-form-controls">
                 <input name="email" id="email" type="email" class="uk-input @error('email') uk-form-danger @enderror" placeholder="Email address" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
-                <span class="uk-text-danger">{{ $message }}</span>
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -36,12 +36,15 @@
             <div class="uk-form-controls">
                 <input name="password" id="password" type="password" class="uk-input @error('password') uk-form-danger @enderror" placeholder="Password" required autocomplete="password" >
                 @error('password')
-                <span class="uk-text-danger">{{ $message }}</span>
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
         
         <div class="uk-width-1-1">
+            <div class="uk-form-controls uk-margin-small">
+                <label for=remember><input class="uk-checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}</label>
+            </div>
             <div class="uk-form-controls">
                 <button class="uk-button uk-button-primary">Login</button>
             </div>

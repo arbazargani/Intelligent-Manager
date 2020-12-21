@@ -8,10 +8,19 @@ use App\Models\Service;
 
 class CustomerController extends Controller
 {
+    protected $customers;
+
+    public function __Construct() {
+        $this->customers = Customer::latest()->get();
+    }
     public function AddCustomer(Request $request) {
         if ($request->isMethod('GET')) {
             return view('public.components.form.AddCustomer');
         } elseif ($request->isMethod('POST')) {
+            $request->validate([
+                'customer_name' => 'required|min:3',
+                'company_name' => 'required|min:4',
+            ]);
             $customer = new Customer();
             $customer->name = $request->customer_name;
             $customer->company_name = $request->company_name;
@@ -31,7 +40,7 @@ class CustomerController extends Controller
     }
 
     public function ListCustomers(Request $request) {
-        $customers = Customer::latest()->get();
+        $customers = $this->customers;
         return view('public.components.table.ListCustomers', compact('customers'));
     }
 

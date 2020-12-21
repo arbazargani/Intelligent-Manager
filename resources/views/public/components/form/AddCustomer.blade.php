@@ -2,32 +2,6 @@
 
 @section('title')
 <title>Add Customer</title>
-<style>
-    .alert-box {
-        background: #f4645f;
-        color: #fff;
-        border-radius: 3px;
-        margin: 10px 0 20px;
-        padding: 10px;
-    }
-
-    .info-box {
-        background: #3498db;
-        color: #fff;
-        border-radius: 3px;
-        margin: 10px 0 20px;
-        padding: 10px;
-    }
-
-    .spaned {
-        background: #fefefe;
-        color: gray;
-        padding: 0 1.5%;
-        border-radius: 3px;
-        color: black;
-        
-    }
-</style>
 @endsection
 
 @section('content')
@@ -47,6 +21,9 @@
             <label class="uk-form-label" for="form-stacked-text">Name</label>
             <div class="uk-form-controls">
                 <input name="customer_name" class="uk-input" type="text" placeholder="Customer name">
+                @error('customer_name')
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
 
@@ -54,6 +31,9 @@
             <label class="uk-form-label" for="form-stacked-text">Company name</label>
             <div class="uk-form-controls">
                 <input name="company_name" class="uk-input" type="text" placeholder="Company name">
+                @error('company_name')
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <!-- 

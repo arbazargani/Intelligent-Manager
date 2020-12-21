@@ -21,6 +21,9 @@
             <label class="uk-form-label" for="form-stacked-text">Name</label>
             <div class="uk-form-controls">
                 <input name="service_name" class="uk-input" type="text" placeholder="Service name" value="{{ $service->name }}">
+                @error('service_name')
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
 
@@ -32,6 +35,9 @@
                     <option value="{{ $customer->id }}" @if($customer->id == $service->customer_id) selected @endif>{{ $customer->name }}</option>
                 @endforeach
                 </select>
+                @error('customer_id')
+                <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <!--
@@ -69,6 +75,9 @@
                 <label class="uk-form-label" for="form-stacked-text">Options & values</label>
                 <div class="uk-form-controls">
                     <textarea id="options" name="options" class="uk-textarea" cols="30" rows="7">{{ $service->info }}</textarea>
+                    @error('options')
+                    <span class="uk-text-meta uk-text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 

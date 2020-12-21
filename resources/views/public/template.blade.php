@@ -57,7 +57,9 @@
             padding: 0 1.5%;
             border-radius: 3px;
             color: black;
-            
+        }
+        .text-transform-unset {
+            text-transform: unset !important;
         }
     </style>
     
@@ -84,8 +86,10 @@
                 </div>
                 <div>
                     <p uk-tooltip="title: Services; pos: top">
-                        <span uk-icon="database"></span>
-                        <span class="uk-visible@m">&nbsp;<a href="#" class="uk-link-reset">Services</a></span>
+                        <a href="{{ route('Services > List') }}" class="uk-link-reset">
+                            <span uk-icon="database"></span>
+                            <span class="uk-visible@m">&nbsp;Services</span>
+                        </a>
                     </p>
                 </div>
                 <div>
