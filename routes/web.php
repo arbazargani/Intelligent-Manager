@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 Auth::routes();
 
+Route::get('logout', function () {
+    Auth::logout();
+});
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', 'App\Http\Controllers\PublicController@Index')->name('Index');

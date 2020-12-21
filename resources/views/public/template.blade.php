@@ -11,6 +11,10 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.16/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.16/dist/js/uikit-icons.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alfg/ping.js@0.2.2/dist/ping.min.js" type="text/javascript"></script>
+
+
     <style>
         body {
             background: lightgray;
@@ -60,6 +64,13 @@
         }
         .text-transform-unset {
             text-transform: unset !important;
+        }
+        .led {
+            height: 10px;
+            width: 10px;
+            background-color: #4cd137;
+            border-radius: 50%;
+            display: inline-block;
         }
     </style>
     
@@ -114,8 +125,20 @@
     <div class="uk-container uk-container-expand uk-padding-large uk-padding-remove-top bg-lightgray">
         <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
             @if(Auth::check())
-            <div class="uk-margin-small-bottom">
-                <span class="uk-text-meta">logged in: {{ Auth::user()->name }}</span>
+            <div class="uk-margin-small-bottom uk-child-width-expand@m" uk-grid>
+                <div>
+                    <span class="uk-text-meta">logged in: {{ Auth::user()->name }}</span>
+                </div>
+                <div>
+                    <span class="led" id="cryptiner-led"></span>
+                    <span>Cryptiner</span>
+                    <span id="ping-cryptiner"></span>
+                </div>
+                <div>
+                    <span class="led" id="ketabnews-led"></span>
+                    <span>Ketabnews</span>
+                    <span id="ping-ketabnews"></span>
+                </div>
             </div>
             @endif
             @yield('content')
@@ -125,5 +148,20 @@
         </div>
     </div>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        function CheckPing(index, url) {
+            var p = new Ping();
+            p.ping(url, function(err, data) {
+                if (err) {
+                    console.log("error loading " + index + " resources");
+                    data = data + " " + err;
+                    document.getElementById(index+'-led').style.backgroundColor = '#e74c3c';
+                }
+                document.getElementById("ping-"+index).innerHTML = data;
+            });
+        }
+        CheckPing('ketabnews', 'https://ketabnews.com');
+        CheckPing('cryptiner', 'https://cryptiner.com/');
+    </script>
 </body>
 </html>
